@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class TrackAdapter(): RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
@@ -32,9 +33,11 @@ class TrackAdapter(): RecyclerView.Adapter<TrackAdapter.TrackViewHolder>() {
         fun bind(model: Track) {
             Glide.with(itemView.context)
                 .load(model.artworkUrl100)
-                .placeholder(R.drawable.ic_search)
+                .placeholder(R.drawable.place_holder)
                 .centerCrop()
                 .transform(RoundedCorners(10))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(imageTrack)
             nameTrack.text = model.trackName
             nameArtists.text = model.artistName
